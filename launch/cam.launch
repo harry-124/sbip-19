@@ -1,6 +1,6 @@
 <launch>
   <node name="usb_cam" pkg="usb_cam" type="usb_cam_node" output="screen" >
-    <param name="video_device" value="/dev/video1 " />
+    <param name="video_device" value="/dev/video1" />
     <param name="image_width" value="640" />
     <param name="image_height" value="480" />
     <param name="pixel_format" value="yuyv" />
@@ -17,7 +17,7 @@
   <node name="balldata" pkg="sbip" type="getballdata.py" respawn="false" output="screen"/>
   <node name="balltwist" pkg="sbip" type="ballspeed.py" respawn="false" output="screen"/>
   <node name="image_view" pkg="image_view" type="image_view" respawn="false" output="screen">
-    <remap from="image" to="/botmask"/>
+    <remap from="image" to="/fieldroi"/>
     <param name="autosize" value="true" />
   </node>
 </launch>
