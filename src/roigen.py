@@ -31,9 +31,19 @@ class image_converter:
       cX = int(M["m10"] / M["m00"])
       cY = int(M["m01"] / M["m00"])
       points.append((cX,cY))
-    points = [points[2],points[3],points[0],points[1]] 
-    self.points = np.float32(points)
 
+#This section orders the points clockwise(starting from bottom left) for the perspective transform by using the sums and differences of x and y coordinates
+    self.points = np.float32(points)
+    self.pts = np.float32(points)
+    d = np.diff(self.points, axis=1)
+    s = self.points.sum(axis=1)
+
+    self.pts[0] = self.points[np.argmin(s)]
+    self.pts[2] = self.points[np.argmax(d)]
+    self.pts[1] = self.points[np.argmin(d)]
+    self.pts[3] = self.points[np.argmax(s)]
+
+ 
   def __init__(self):
     self.image_pub = rospy.Publisher("fieldroi",Image, queue_size = 10)
     self.bridge = CvBridge()
@@ -51,7 +61,7 @@ class image_converter:
     if self.i == 0:
       self.getcorner()
       self.i = 1
-    perspective_transform = cv2.getPerspectiveTransform(self.points,points_2)
+    perspective_transform = cv2.getPerspectiveTransform(self.pts,points_2)
     dst = cv2.warpPerspective(frame,perspective_transform,(640,566))
 
     try:
