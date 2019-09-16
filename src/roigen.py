@@ -24,7 +24,6 @@ class image_converter:
     kernel =np.ones((10,10),np.uint8)
     points = []
     dilation = cv2.dilate(mask_red,kernel,iterations = 1)
-    cv2.imshow('asd',dilation)
     _,cnts,_ = cv2.findContours(dilation, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     for c in cnts:
       M = cv2.moments(c)
