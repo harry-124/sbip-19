@@ -61,7 +61,7 @@ class image_converter:
     if self.i == 0:
       self.getcorner()
       self.i = 1
-    perspective_transform = cv2.getPerspectiveTransform(self.pts,points_2)
+    perspective_transform = cv2.getPerspectiveTransform(points_1,points_2)
     dst = cv2.warpPerspective(frame,perspective_transform,(640,566))
 
     try:
