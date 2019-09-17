@@ -24,7 +24,6 @@ class image_converter:
     kernel =np.ones((10,10),np.uint8)
     points = []
     dilation = cv2.dilate(mask_red,kernel,iterations = 1)
-    cv2.imshow('asd',dilation)
     _,cnts,_ = cv2.findContours(dilation, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     for c in cnts:
       M = cv2.moments(c)
@@ -61,7 +60,7 @@ class image_converter:
     if self.i == 0:
       self.getcorner()
       self.i = 1
-    perspective_transform = cv2.getPerspectiveTransform(self.pts,points_2)
+    perspective_transform = cv2.getPerspectiveTransform(points_1,points_2)
     dst = cv2.warpPerspective(frame,perspective_transform,(640,566))
 
     try:
