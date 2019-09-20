@@ -58,7 +58,7 @@ class image_converter:
       print(e)
     frame = cv2.medianBlur(cv_image,3)
     if self.i == 0:
-      self.getcorner()
+      #self.getcorner()
       self.i = 1
     perspective_transform = cv2.getPerspectiveTransform(points_1,points_2)
     dst = cv2.warpPerspective(frame,perspective_transform,(640,566))
